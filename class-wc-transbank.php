@@ -371,7 +371,6 @@ function woocommerce_transbank_init()
         }
 
         $finalResponse = WC()->session->get($order_info->get_order_key());
-        print_r($finalResponse);
         WC()->session->set($order_info->get_order_key(), "");
 
         $paymentTypeCode = $finalResponse->detailOutput->paymentTypeCode;
