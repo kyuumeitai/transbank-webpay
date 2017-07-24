@@ -119,30 +119,30 @@ function woocommerce_transbank_init()
                     'options' => array('INTEGRACION' => 'Integraci&oacute;n', 'CERTIFICACION' => 'Certificaci&oacute;n', 'PRODUCCION' => 'Producci&oacute;n'),
                     'default'     => __( 'INTEGRACION', 'woocommerce' ),
                     'custom_attributes' => array(
-                        'onchange' => "webpay_mode('".$this->integration[commerce_code]."', '".$this->integration[private_key]."', '".$this->integration[public_cert]."', '".$this->integration[webpay_cert]."')",
+                        'onchange' => "webpay_mode('".$this->integration['commerce_code']."', '".$this->integration['private_key']."', '".$this->integration['public_cert']."', '".$this->integration['webpay_cert']."')",
                     )
                 ),
                 'webpay_commerce_code' => array(
                     'title' => __('C&oacute;digo de Comercio', 'woocommerce'),
                     'type' => 'text',
-                    'default' => __($this->integration[commerce_code], 'woocommerce'),
+                    'default' => __($this->integration['commerce_code'], 'woocommerce'),
                 ),
                 'webpay_private_key' => array(
                     'title' => __('Llave Privada', 'woocommerce'),
                     'type' => 'textarea',
-                    'default' => __(str_replace("<br/>", "\n", $this->integration[private_key]), 'woocommerce'),
+                    'default' => __(str_replace("<br/>", "\n", $this->integration['private_key']), 'woocommerce'),
                     'css' => 'font-family: monospace',
                 ),
                 'webpay_public_cert' => array(
                     'title' => __('Certificado', 'woocommerce'),
                     'type' => 'textarea',
-                    'default' => __(str_replace("<br/>", "\n", $this->integration[public_cert]), 'woocommerce'),
+                    'default' => __(str_replace("<br/>", "\n", $this->integration['public_cert']), 'woocommerce'),
                     'css' => 'font-family: monospace',
                 ),
                 'webpay_webpay_cert' => array(
                     'title' => __('Certificado Transbank', 'woocommerce'),
                     'type' => 'textarea',
-                    'default' => __(str_replace("<br/>", "\n", $this->integration[webpay_cert]), 'woocommerce'),
+                    'default' => __(str_replace("<br/>", "\n", $this->integration['webpay_cert']), 'woocommerce'),
                     'css' => 'font-family: monospace',
                 ),
             );
