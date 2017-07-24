@@ -354,8 +354,8 @@ function woocommerce_transbank_init()
     {
         $order_info = new WC_Order($order_id);
         $transbank_data = new WC_Gateway_transbank;
-
-        if ($order_info->payment_method_title == $transbank_data->title) {
+        
+        if ($order_info->get_payment_method_title() == $transbank_data->title) {
             
             if (WC()->session->get($order_info->order_key . "_transaction_paid") == "" && WC()->session->get($order_info->order_key) == "") {
 
