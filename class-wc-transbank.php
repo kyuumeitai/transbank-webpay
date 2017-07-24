@@ -357,7 +357,7 @@ function woocommerce_transbank_init()
         
         if ($order_info->get_payment_method_title() == $transbank_data->title) {
             
-            if (WC()->session->get($order_info->order_key . "_transaction_paid") == "" && WC()->session->get($order_info->order_key) == "") {
+            if (WC()->session->get($order_info->get_order_key() . "_transaction_paid") == "" && WC()->session->get($order_info->get_order_key()) == "") {
 
                 wc_add_notice(__('Compra <strong>Anulada</strong>', 'woocommerce') . ' por usuario. Recuerda que puedes pagar o 
                     cancelar tu compra cuando lo desees desde <a href="' . wc_get_page_permalink('myaccount') . '">' . __('Tu Cuenta', 'woocommerce') . '</a>', 'error');
@@ -370,8 +370,9 @@ function woocommerce_transbank_init()
             return;
         }
 
-        $finalResponse = WC()->session->get($order_info->order_key);
-        WC()->session->set($order_info->order_key, "");
+        $finalResponse = WC()->session->get($order_info->get_order_key());
+        print_r($finalResponse);
+        WC()->session->set($order_info->get_order_key(), "");
 
         $paymentTypeCode = $finalResponse->detailOutput->paymentTypeCode;
         $paymenCodeResult = $transbank_data->config['VENTA_DESC'][$paymentTypeCode];
