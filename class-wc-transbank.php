@@ -199,14 +199,14 @@ function woocommerce_transbank_init()
 
             $order_info = new WC_Order($result->buyOrder);
             
-            WC()->session->set($order_info->order_key, $result);
+            WC()->session->set($order_info->get_order_key(), $result);
 
             if ($result->buyOrder && $order_info) {
 
                 if (($result->VCI == "TSY" || $result->VCI == "") && $result->detailOutput->responseCode == 0) {
 
                     $voucher = true;
-                    WC()->session->set($order_info->order_key . "_transaction_paid", 1);
+                    WC()->session->set($order_info->get_order_key() . "_transaction_paid", 1);
 
                     WebPaySOAP::redirect($result->urlRedirection, array("token_ws" => $token_ws));
 
@@ -224,7 +224,7 @@ function woocommerce_transbank_init()
 
                 $date = new DateTime($result->transactionDate);
                 
-                WC()->session->set($order_info->order_key, "");
+                WC()->session->set($order_info->get_order_key(), "");
 
                 $error_message = "Estimado cliente, le informamos que su orden número ". $result->buyOrder . ", realizada el " . $date->format('d-m-Y H:i:s') . " termin&oacute; de forma inesperada ( " . $responseDescription . " ) ";
                 wc_add_notice(__('ERROR: ', 'woothemes') . $error_message, 'error');
@@ -245,7 +245,7 @@ function woocommerce_transbank_init()
             $order = new WC_Order($order_id);
             $amount = (int) number_format($order->get_total(), 0, ',', '');
 
-            $urlFinal = str_replace("_URL_", add_query_arg('key', $order->order_key, $order->get_checkout_order_received_url()), $this->config["URL_FINAL"]);
+            $urlFinal = str_replace("_URL_", add_query_arg('key', $order->get_order_key(), $order->get_checkout_order_received_url()), $this->config["URL_FINAL"]);
             
             try {
 
